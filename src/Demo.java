@@ -55,7 +55,7 @@ public class Demo {
         session.close();
         sessionFactory.close();
         //=========================*/
-        //==========Find All===============
+       /* //==========Find All===============
         Customer c1 = null;
         Configuration configuration =
                 new Configuration()
@@ -66,6 +66,20 @@ public class Demo {
         Query query = session.createQuery("FROM customer_table");
         List<Customer> list = query.list();
         System.out.println(list);
+        session.close();
+        sessionFactory.close();
+        //=========================*/
+        //==========Delete===============
+        Customer c1 = null;
+        Configuration configuration =
+                new Configuration()
+                        .configure("hibernate.cfg.xml")
+                        .addAnnotatedClass(Customer.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(session.find(Customer.class,"C001"));
+        transaction.commit();
         session.close();
         sessionFactory.close();
         //=========================
