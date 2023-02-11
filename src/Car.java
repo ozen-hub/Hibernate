@@ -1,5 +1,6 @@
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -9,6 +10,7 @@ public class Car {
     private String brand;
 
     @OneToOne
+    @JoinColumn(unique = true)// ***
     private Customer customer;
 
     public Car() {

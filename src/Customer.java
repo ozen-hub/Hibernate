@@ -1,7 +1,5 @@
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "customer_table")
 public class Customer {
@@ -14,6 +12,9 @@ public class Customer {
 
     @OneToOne(mappedBy = "customer")
     private Car car;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders;
 
 
     public Customer() {
