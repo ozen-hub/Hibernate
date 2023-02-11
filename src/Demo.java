@@ -3,6 +3,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class Demo {
     public static void main(String[] args) {
@@ -34,7 +37,7 @@ public class Demo {
         session.close();
         sessionFactory.close();
         //=========================*/
-        //==========Update One===============
+       /* //==========Update One===============
         Customer c1 = null;
         Configuration configuration =
                 new Configuration()
@@ -49,6 +52,20 @@ public class Demo {
         Transaction transaction = session.beginTransaction();
         session.save(c1);
         transaction.commit();
+        session.close();
+        sessionFactory.close();
+        //=========================*/
+        //==========Find All===============
+        Customer c1 = null;
+        Configuration configuration =
+                new Configuration()
+                        .configure("hibernate.cfg.xml")
+                        .addAnnotatedClass(Customer.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("FROM customer_table");
+        List<Customer> list = query.list();
+        System.out.println(list);
         session.close();
         sessionFactory.close();
         //=========================
