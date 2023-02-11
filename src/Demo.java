@@ -6,8 +6,8 @@ import org.hibernate.cfg.Configuration;
 
 public class Demo {
     public static void main(String[] args) {
-        //=========================
-        Customer c1 = new Customer("C001", "Nimal", "Colombo", 25000);
+        //==========Save===============
+       /* Customer c1 = new Customer("C001", "Nimal", "Colombo", 25000);
         Configuration configuration =
                 new Configuration()
                         .configure("hibernate.cfg.xml")
@@ -18,6 +18,19 @@ public class Demo {
         session.save(c1);
         transaction.commit();
         //==========
+        session.close();
+        sessionFactory.close();*/
+        //=========================
+        //==========Find One===============
+        Customer c1 = null;
+        Configuration configuration =
+                new Configuration()
+                        .configure("hibernate.cfg.xml")
+                        .addAnnotatedClass(Customer.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        c1 = session.find(Customer.class,"C001"); // hql => (FROM customer WHERE id:id)
+        System.out.println(c1);
         session.close();
         sessionFactory.close();
         //=========================
