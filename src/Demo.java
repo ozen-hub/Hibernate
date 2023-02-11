@@ -21,7 +21,7 @@ public class Demo {
         session.close();
         sessionFactory.close();*/
         //=========================
-        //==========Find One===============
+       /* //==========Find One===============
         Customer c1 = null;
         Configuration configuration =
                 new Configuration()
@@ -31,6 +31,24 @@ public class Demo {
         Session session = sessionFactory.openSession();
         c1 = session.find(Customer.class,"C001"); // hql => (FROM customer WHERE id:id)
         System.out.println(c1);
+        session.close();
+        sessionFactory.close();
+        //=========================*/
+        //==========Update One===============
+        Customer c1 = null;
+        Configuration configuration =
+                new Configuration()
+                        .configure("hibernate.cfg.xml")
+                        .addAnnotatedClass(Customer.class);
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        c1 = session.find(Customer.class,"C001");
+        c1.setName("Kamal");
+        c1.setAddress("Galle");
+        c1.setSalary(25000);
+        Transaction transaction = session.beginTransaction();
+        session.save(c1);
+        transaction.commit();
         session.close();
         sessionFactory.close();
         //=========================
