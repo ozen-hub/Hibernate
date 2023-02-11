@@ -1,6 +1,7 @@
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity(name = "customer_table")
 public class Customer {
@@ -10,6 +11,10 @@ public class Customer {
     private String name;
     private String address;
     private double salary;
+
+    @OneToOne(mappedBy = "customer")
+    private Car car;
+
 
     public Customer() {
     }
