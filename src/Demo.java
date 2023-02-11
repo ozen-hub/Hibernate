@@ -70,18 +70,17 @@ public class Demo {
         sessionFactory.close();
         //=========================*/
         //==========Delete===============
-        Customer c1 = null;
+       /* Customer c1 = null;
         Configuration configuration =
                 new Configuration()
                         .configure("hibernate.cfg.xml")
                         .addAnnotatedClass(Customer.class);
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
-        Session session = sessionFactory.openSession();
+        SessionFactory sessionFactory = configuration.buildSessionFactory();*/
+        Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
         session.delete(session.find(Customer.class,"C001"));
         transaction.commit();
         session.close();
-        sessionFactory.close();
         //=========================
     }
 }
